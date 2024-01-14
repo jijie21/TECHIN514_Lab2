@@ -1,18 +1,22 @@
 #include <Arduino.h>
 
-// put function declarations here:
-int myFunction(int, int);
+const int analogPin = D9;
+float voltage;
 
 void setup() {
-  // put your setup code here, to run once:
-  int result = myFunction(2, 3);
+  Serial.begin(115200); 
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-}
+  int adcValue = analogRead(analogPin);
+  voltage = (adcValue / 4095.0) * 3.3;
 
-// put function definitions here:
-int myFunction(int x, int y) {
-  return x + y;
+  // Display the voltage reading on the serial monitor
+  Serial.print("ADC Value: ");
+  Serial.print(adcValue);
+  Serial.print(", Voltage: ");
+  Serial.print(voltage);
+  Serial.println(" V");
+
+  delay(1000);
 }
